@@ -143,6 +143,7 @@
     left: 14px;
     bottom: calc(14px + env(safe-area-inset-bottom, 0px));
     z-index: 2147483647;
+    display: inline-flex; align-items: center;
     border: 0; border-radius: 999px;
     padding: 12px 18px;
     font: inherit; font-weight: 600;
@@ -150,7 +151,20 @@
     background: var(--hero);
     box-shadow: 0 2px 10px rgba(0,0,0,.35);
     cursor: pointer;
+    transition: padding .45s ease, opacity .45s ease;
   }
+  #home svg { flex: none; width: 20px; height: 20px; margin-right: 8px; transition: margin .45s ease; }
+  #home .label {
+    display: inline-block;
+    max-width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width .45s ease, opacity .3s ease;
+  }
+  /* Keadaan mengecil: tinggal ikon bulat kecil */
+  #home.mini { padding: 12px; opacity: .75; }
+  #home.mini svg { margin-right: 0; }
+  #home.mini .label { max-width: 0; opacity: 0; }
   .theme-btn {
     position: absolute;
     top: calc(14px + env(safe-area-inset-top, 0px));
@@ -225,20 +239,28 @@
 
   <div id="viewer">
     <iframe id="frame" title="Outstanding SIP" allow="camera; clipboard-write"></iframe>
-    <button id="home" type="button">Ganti outstanding</button>
+    <button id="home" type="button" aria-label="Ganti outstanding"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span class="label">Ganti outstanding</span></button>
   </div>
 
 <script>
   var frame = document.getElementById('frame');
   var home = document.getElementById('home');
 
+  var miniTimer = null;
+
   function openApp(btn) {
     frame.src = btn.getAttribute('data-url');
     document.body.setAttribute('data-app', btn.id);
     document.body.classList.add('open');
     history.pushState({ open: true }, '');
+    // Setelah 2 detik, tombol mengecil dengan animasi
+    home.classList.remove('mini');
+    clearTimeout(miniTimer);
+    miniTimer = setTimeout(function () { home.classList.add('mini'); }, 2000);
   }
   function closeApp() {
+    clearTimeout(miniTimer);
+    home.classList.remove('mini');
     document.body.classList.remove('open');
     document.body.removeAttribute('data-app');
     frame.src = 'about:blank';
@@ -249,6 +271,14 @@
   });
   // Sekali klik langsung kembali ke menu utama
   home.addEventListener('click', function () {
+    // Kalau sedang mengecil: tekan sekali = tampil penuh dulu
+    if (home.classList.contains('mini')) {
+      home.classList.remove('mini');
+      clearTimeout(miniTimer);
+      miniTimer = setTimeout(function () { home.classList.add('mini'); }, 2000);
+      return;
+    }
+    // Kalau sudah tampil penuh: tekan = kembali ke menu utama
     closeApp();
     history.replaceState({}, '');
   });
