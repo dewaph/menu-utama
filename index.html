@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="SIP Outstanding">
-<title>Outstanding SIP 2026</title>
+<title>Outstanding Pura Bangunan dan Manika</title>
 <style>
   :root {
     --bg: #eef0f7;
@@ -21,6 +21,8 @@
     --bangunan-soft: #e6e9fb;
     --manika: #0f766e;
     --manika-soft: #dcf3ef;
+    --oksigen: #c2570c;
+    --oksigen-soft: #fde9d8;
     --shadow: 0 6px 20px rgba(22, 26, 46, .10);
   }
   @media (prefers-color-scheme: dark) {
@@ -36,6 +38,8 @@
       --bangunan-soft: #262c5c;
       --manika: #4fd1c2;
       --manika-soft: #173d3a;
+      --oksigen: #ffa05a;
+      --oksigen-soft: #4a2c14;
       --shadow: 0 6px 20px rgba(0, 0, 0, .35);
     }
   }
@@ -56,14 +60,18 @@
     border-radius: 0 0 28px 28px;
   }
   .hero-inner { max-width: 520px; margin: 0 auto; }
-  .logo {
-    width: 52px; height: 52px;
+  .brand {
+    display: block;
+    height: 36px;
+    width: auto;
+    max-width: 100%;
+    box-sizing: content-box;
+    background: #fff;
+    padding: 12px 16px;
     border-radius: 14px;
-    background: rgba(255,255,255,.16);
-    display: grid; place-items: center;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
   }
-  .logo svg { width: 28px; height: 28px; }
+  .brand-text { font-weight: 700; font-size: 1.2rem; margin-bottom: 22px; }
   .hero h1 { margin: 0; font-size: 1.9rem; line-height: 1.15; letter-spacing: -.02em; }
   .hero p { margin: 8px 0 0; color: rgba(255,255,255,.8); font-size: 1rem; }
 
@@ -105,6 +113,7 @@
   .chev { flex: none; width: 22px; height: 22px; color: var(--muted); }
   #bangunan { --c: var(--bangunan); --soft: var(--bangunan-soft); }
   #manika { --c: var(--manika); --soft: var(--manika-soft); }
+  #oksigen { --c: var(--oksigen); --soft: var(--oksigen-soft); }
 
   .foot {
     margin-top: auto;
@@ -142,11 +151,9 @@
   <main id="menu">
     <header class="hero">
       <div class="hero-inner">
-        <div class="logo" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-        </div>
-        <h1>Outstanding SIP 2026</h1>
-        <p>Pantau barang pesanan yang belum datang.</p>
+        <img class="brand" src="pura-group.svg" alt="Pura Group" onerror="this.outerHTML='<div class=&quot;brand-text&quot;>Pura Group</div>'">
+        <h1>Outstanding Pura Bangunan dan Manika</h1>
+        <p>Pantau barang pesanan dan tabung oksigen.</p>
       </div>
     </header>
 
@@ -172,13 +179,24 @@
         </span>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </button>
+
+      <button class="choice" id="oksigen" data-url="https://dewaph.github.io/tabung-oksigen/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4"/><path d="M12 2v3"/><path d="M8 9a4 4 0 014-4 4 4 0 014 4v11a2 2 0 01-2 2h-4a2 2 0 01-2-2V9z"/><path d="M8 11h8"/></svg>
+        </span>
+        <span class="text">
+          <strong>Tabung Oksigen</strong>
+          <span>Pengelolaan tabung dari supplier</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
     </div>
 
     <footer class="foot">Pilih salah satu untuk membuka daftarnya.</footer>
   </main>
 
   <div id="viewer">
-    <iframe id="frame" title="Outstanding SIP" allow="clipboard-write"></iframe>
+    <iframe id="frame" title="Outstanding SIP" allow="camera; clipboard-write"></iframe>
     <button id="home" type="button">Ganti outstanding</button>
   </div>
 
