@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#24339a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SIP Outstanding">
+<title>Outstanding SIP 2026</title>
+<style>
+  :root {
+    --bg: #eef0f7;
+    --surface: #ffffff;
+    --text: #161a2e;
+    --muted: #5f6580;
+    --line: #e1e4ef;
+    --hero: #24339a;
+    --hero-2: #1a2578;
+    --bangunan: #24339a;
+    --bangunan-soft: #e6e9fb;
+    --manika: #0f766e;
+    --manika-soft: #dcf3ef;
+    --shadow: 0 6px 20px rgba(22, 26, 46, .10);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1120;
+      --surface: #1b1f33;
+      --text: #eef0f8;
+      --muted: #a4abc6;
+      --line: #2a2f48;
+      --hero: #1a2578;
+      --hero-2: #121a5c;
+      --bangunan: #8a99ff;
+      --bangunan-soft: #262c5c;
+      --manika: #4fd1c2;
+      --manika-soft: #173d3a;
+      --shadow: 0 6px 20px rgba(0, 0, 0, .35);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  #menu { min-height: 100%; display: flex; flex-direction: column; }
+
+  .hero {
+    background: linear-gradient(160deg, var(--hero), var(--hero-2));
+    color: #fff;
+    padding: calc(40px + env(safe-area-inset-top, 0px)) 24px 84px;
+    border-radius: 0 0 28px 28px;
+  }
+  .hero-inner { max-width: 520px; margin: 0 auto; }
+  .logo {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.16);
+    display: grid; place-items: center;
+    margin-bottom: 18px;
+  }
+  .logo svg { width: 28px; height: 28px; }
+  .hero h1 { margin: 0; font-size: 1.9rem; line-height: 1.15; letter-spacing: -.02em; }
+  .hero p { margin: 8px 0 0; color: rgba(255,255,255,.8); font-size: 1rem; }
+
+  .list {
+    max-width: 520px;
+    width: 100%;
+    margin: -52px auto 0;
+    padding: 0 18px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .choice {
+    display: flex; align-items: center; gap: 16px;
+    width: 100%;
+    text-align: left;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    font: inherit;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .choice:active { transform: scale(.985); }
+  .choice:focus-visible { outline: 3px solid var(--c); outline-offset: 2px; }
+  .icon {
+    flex: none;
+    width: 58px; height: 58px;
+    border-radius: 16px;
+    background: var(--soft);
+    color: var(--c);
+    display: grid; place-items: center;
+  }
+  .icon svg { width: 30px; height: 30px; }
+  .text { flex: 1; min-width: 0; }
+  .text strong { display: block; font-size: 1.15rem; letter-spacing: -.01em; }
+  .text span { display: block; margin-top: 3px; color: var(--muted); font-size: .92rem; }
+  .chev { flex: none; width: 22px; height: 22px; color: var(--muted); }
+  #bangunan { --c: var(--bangunan); --soft: var(--bangunan-soft); }
+  #manika { --c: var(--manika); --soft: var(--manika-soft); }
+
+  .foot {
+    margin-top: auto;
+    padding: 28px 24px calc(24px + env(safe-area-inset-bottom, 0px));
+    text-align: center;
+    color: var(--muted);
+    font-size: .85rem;
+  }
+
+  #viewer { display: none; position: fixed; inset: 0; background: var(--bg); }
+  #viewer iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0; background: #fff;
+  }
+  #home {
+    position: fixed;
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    z-index: 5;
+    border: 0;
+    border-radius: 999px;
+    padding: 11px 18px;
+    font: inherit; font-weight: 600;
+    color: #fff;
+    background: var(--hero);
+    box-shadow: 0 2px 10px rgba(0,0,0,.3);
+    cursor: pointer;
+  }
+  body.open #menu { display: none; }
+  body.open #viewer { display: block; }
+</style>
+</head>
+<body>
+  <main id="menu">
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+        </div>
+        <h1>Outstanding SIP 2026</h1>
+        <p>Pantau barang pesanan yang belum datang.</p>
+      </div>
+    </header>
+
+    <div class="list">
+      <button class="choice" id="bangunan" data-url="https://dewaph.github.io/outstanding-sip-bangunan/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M2 21h20"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01M15 10h.01"/></svg>
+        </span>
+        <span class="text">
+          <strong>Outstanding Bangunan</strong>
+          <span>Daftar outstanding bangunan</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+
+      <button class="choice" id="manika" data-url="https://dewaph.github.io/outstanding-sip-manika/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/></svg>
+        </span>
+        <span class="text">
+          <strong>Outstanding Manika</strong>
+          <span>Daftar outstanding Manika</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <footer class="foot">Pilih salah satu untuk membuka daftarnya.</footer>
+  </main>
+
+  <div id="viewer">
+    <iframe id="frame" title="Outstanding SIP" allow="clipboard-write"></iframe>
+    <button id="home" type="button">Ganti outstanding</button>
+  </div>
+
+<script>
+  var frame = document.getElementById('frame');
+  var home = document.getElementById('home');
+
+  function openApp(btn) {
+    frame.src = btn.getAttribute('data-url');
+    document.body.classList.add('open');
+    history.pushState({ open: true }, '');
+  }
+  function closeApp() {
+    document.body.classList.remove('open');
+    frame.src = 'about:blank';
+  }
+
+  document.querySelectorAll('.choice').forEach(function (b) {
+    b.addEventListener('click', function () { openApp(b); });
+  });
+  home.addEventListener('click', function () {
+    if (history.state && history.state.open) history.back(); else closeApp();
+  });
+  // Tombol Back di HP kembali ke menu pilihan
+  window.addEventListener('popstate', closeApp);
+</script>
+</body>
+</html>
