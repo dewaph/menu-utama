@@ -165,8 +165,10 @@
   :root[data-theme="dark"] .theme-btn .moon { display: block; }
   .hero { position: relative; }
 
-  /* Mode gelap untuk halaman yang dibuka di dalam menu */
-  :root[data-theme="dark"] #viewer iframe { filter: invert(1) hue-rotate(180deg); background: #111; }
+  /* Mode gelap hanya untuk menu utama dan Tabung Oksigen */
+  :root[data-theme="dark"] body[data-app="oksigen"] #viewer iframe { filter: invert(1) hue-rotate(180deg); background: #111; }
+  /* Tombol mode gelap di dalam aplikasi hanya untuk Tabung Oksigen */
+  body:not([data-app="oksigen"]) #viewer .theme-btn { display: none; }
   #viewer .theme-btn {
     position: fixed;
     top: auto;
@@ -241,11 +243,13 @@
 
   function openApp(btn) {
     frame.src = btn.getAttribute('data-url');
+    document.body.setAttribute('data-app', btn.id);
     document.body.classList.add('open');
     history.pushState({ open: true }, '');
   }
   function closeApp() {
     document.body.classList.remove('open');
+    document.body.removeAttribute('data-app');
     frame.src = 'about:blank';
   }
 
