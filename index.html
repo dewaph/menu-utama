@@ -28,7 +28,7 @@
     --oksigen: #c2570c;
     --oksigen-soft: #fde9d8;
     --spk: #7c3aed;
-    --spk-soft: #ece4fd;
+    --spk-soft: #ede4fd;
     --shadow: 0 6px 20px rgba(22, 26, 46, .10);
   }
   :root[data-theme="dark"] {
@@ -46,12 +46,12 @@
     --manika-soft: #173d3a;
     --oksigen: #ffa05a;
     --oksigen-soft: #4a2c14;
-    --spk: #b69cff;
-    --spk-soft: #302450;
+    --spk: #b79bff;
+    --spk-soft: #34285c;
     --shadow: 0 6px 20px rgba(0, 0, 0, .35);
   }
   * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
+  html, body { height: 100%; margin: 0; overscroll-behavior-y: none; }
   body {
     background: var(--bg);
     color: var(--text);
@@ -148,6 +148,7 @@
     left: 14px;
     bottom: calc(14px + env(safe-area-inset-bottom, 0px));
     z-index: 2147483647;
+    display: inline-flex; align-items: center;
     border: 0; border-radius: 999px;
     padding: 12px 18px;
     font: inherit; font-weight: 600;
@@ -155,7 +156,20 @@
     background: var(--hero);
     box-shadow: 0 2px 10px rgba(0,0,0,.35);
     cursor: pointer;
+    transition: padding .45s ease, opacity .45s ease;
   }
+  #home svg { flex: none; width: 20px; height: 20px; margin-right: 8px; transition: margin .45s ease; }
+  #home .label {
+    display: inline-block;
+    max-width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width .45s ease, opacity .3s ease;
+  }
+  /* Keadaan mengecil: tinggal ikon bulat kecil */
+  #home.mini { padding: 12px; opacity: .75; }
+  #home.mini svg { margin-right: 0; }
+  #home.mini .label { max-width: 0; opacity: 0; }
   .theme-btn {
     position: absolute;
     top: calc(14px + env(safe-area-inset-top, 0px));
@@ -186,12 +200,12 @@
       <div class="hero-inner">
         <span class="brand-wrap"><img class="brand brand-light" src="pura-group-light.svg" alt="Pura Group"><img class="brand brand-dark" src="pura-group-dark.svg" alt="Pura Group"></span>
         <h1>Outstanding Pura Bangunan dan Manika</h1>
-        <p>Pantau barang pesanan, tabung oksigen, dan SPK.</p>
+        <p>Pantau barang pesanan, tabung oksigen, dan daftar SPK.</p>
       </div>
     </header>
 
     <div class="list">
-      <button class="choice" id="bangunan" data-url="https://dewaph.github.io/outstanding-sip-bangunan/">
+      <button class="choice" id="bangunan" data-url="https://dewaph.github.io/outstanding-bangunan-supabase/">
         <span class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M2 21h20"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01M15 10h.01"/></svg>
         </span>
@@ -202,7 +216,7 @@
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </button>
 
-      <button class="choice" id="manika" data-url="https://dewaph.github.io/outstanding-sip-manika/">
+      <button class="choice" id="manika" data-url="https://dewaph.github.io/outstanding-manika-supabase/">
         <span class="icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/></svg>
         </span>
@@ -226,11 +240,11 @@
 
       <button class="choice" id="spk" data-url="https://dewaph.github.io/daftar-spk/">
         <span class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V7z"/><path d="M14 2v5h5"/><path d="M9 13h6M9 17h6M9 9h2"/></svg>
         </span>
         <span class="text">
           <strong>Daftar SPK</strong>
-          <span>No SPK, pekerjaan, tanggal, pengawas</span>
+          <span>Daftar surat perintah kerja</span>
         </span>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </button>
@@ -241,20 +255,28 @@
 
   <div id="viewer">
     <iframe id="frame" title="Outstanding SIP" allow="camera; clipboard-write"></iframe>
-    <button id="home" type="button">Ganti outstanding</button>
+    <button id="home" type="button" aria-label="Ganti outstanding"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg><span class="label">Ganti outstanding</span></button>
   </div>
 
 <script>
   var frame = document.getElementById('frame');
   var home = document.getElementById('home');
 
+  var miniTimer = null;
+
   function openApp(btn) {
     frame.src = btn.getAttribute('data-url');
     document.body.setAttribute('data-app', btn.id);
     document.body.classList.add('open');
     history.pushState({ open: true }, '');
+    // Setelah 2 detik, tombol mengecil dengan animasi
+    home.classList.remove('mini');
+    clearTimeout(miniTimer);
+    miniTimer = setTimeout(function () { home.classList.add('mini'); }, 2000);
   }
   function closeApp() {
+    clearTimeout(miniTimer);
+    home.classList.remove('mini');
     document.body.classList.remove('open');
     document.body.removeAttribute('data-app');
     frame.src = 'about:blank';
@@ -265,6 +287,14 @@
   });
   // Sekali klik langsung kembali ke menu utama
   home.addEventListener('click', function () {
+    // Kalau sedang mengecil: tekan sekali = tampil penuh dulu
+    if (home.classList.contains('mini')) {
+      home.classList.remove('mini');
+      clearTimeout(miniTimer);
+      miniTimer = setTimeout(function () { home.classList.add('mini'); }, 2000);
+      return;
+    }
+    // Kalau sudah tampil penuh: tekan = kembali ke menu utama
     closeApp();
     history.replaceState({}, '');
   });
