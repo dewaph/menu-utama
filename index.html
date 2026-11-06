@@ -29,6 +29,8 @@
     --oksigen-soft: #fde9d8;
     --spk: #7c3aed;
     --spk-soft: #ede4fd;
+    --alat: #be185d;
+    --alat-soft: #fce4ef;
     --shadow: 0 6px 20px rgba(22, 26, 46, .10);
   }
   :root[data-theme="dark"] {
@@ -48,6 +50,8 @@
     --oksigen-soft: #4a2c14;
     --spk: #b79bff;
     --spk-soft: #34285c;
+    --alat: #f472b6;
+    --alat-soft: #4a1d36;
     --shadow: 0 6px 20px rgba(0, 0, 0, .35);
   }
   * { box-sizing: border-box; }
@@ -123,6 +127,7 @@
   #manika { --c: var(--manika); --soft: var(--manika-soft); }
   #oksigen { --c: var(--oksigen); --soft: var(--oksigen-soft); }
   #spk { --c: var(--spk); --soft: var(--spk-soft); }
+  #alat { --c: var(--alat); --soft: var(--alat-soft); }
 
   .foot {
     margin-top: auto;
@@ -200,7 +205,7 @@
       <div class="hero-inner">
         <span class="brand-wrap"><img class="brand brand-light" src="pura-group-light.svg" alt="Pura Group"><img class="brand brand-dark" src="pura-group-dark.svg" alt="Pura Group"></span>
         <h1>Outstanding Pura Bangunan dan Manika</h1>
-        <p>Pantau barang pesanan, tabung oksigen, dan daftar SPK.</p>
+        <p>Pantau barang pesanan, tabung oksigen, SPK, dan alat kerja.</p>
       </div>
     </header>
 
@@ -245,6 +250,17 @@
         <span class="text">
           <strong>Daftar SPK</strong>
           <span>Daftar surat perintah kerja</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+
+      <button class="choice" id="alat" data-url="https://dewaph.github.io/alat-kerja/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 005.4 5.4l-9.9 9.9a2.1 2.1 0 01-3-3l9.9-9.9z"/><path d="M14.7 6.3l3-3 3 3-3 3"/></svg>
+        </span>
+        <span class="text">
+          <strong>Peminjaman Alat Kerja</strong>
+          <span>Catatan peminjaman alat kerja</span>
         </span>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
       </button>
