@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#16206b">
+<script>(function(){try{var t=localStorage.getItem('menu-theme');if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -677,16 +678,31 @@
     if (meta) meta.setAttribute('content', t === 'dark' ? '#0c1244' : '#16206b');
     syncFrameTheme();
   }
+  // Bawaan: ikuti warna sistem HP. Pilihan manual (tombol tema) hanya tersimpan
+  // bila berbeda dari warna sistem; memilih mode yang sama dengan sistem = kembali otomatis.
+  var mq = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+  function sysTheme() { return mq && mq.matches ? 'dark' : 'light'; }
   var saved = null;
   try { saved = localStorage.getItem('menu-theme'); } catch (e) {}
-  applyTheme(saved || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  if (saved !== 'dark' && saved !== 'light') saved = null;
+  applyTheme(saved || sysTheme());
   document.querySelectorAll('.theme-btn').forEach(function (b) {
     b.addEventListener('click', function () {
       var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       applyTheme(next);
-      try { localStorage.setItem('menu-theme', next); } catch (e) {}
+      try {
+        if (next === sysTheme()) localStorage.removeItem('menu-theme');
+        else localStorage.setItem('menu-theme', next);
+      } catch (e) {}
     });
   });
+  // Warna sistem berubah (mis. jadwal otomatis siang/malam): ikuti bila belum dipilih manual
+  function onSys() {
+    var m = null;
+    try { m = localStorage.getItem('menu-theme'); } catch (e) {}
+    if (m !== 'dark' && m !== 'light') applyTheme(sysTheme());
+  }
+  if (mq) { if (mq.addEventListener) mq.addEventListener('change', onSys); else if (mq.addListener) mq.addListener(onSys); }
 </script>
 </body>
 </html>
