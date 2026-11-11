@@ -203,12 +203,14 @@
     height: 18px;
     flex: none;
   }
-  .theme-btn .moon,
-  .theme-btn .label-dark { display: none; }
-  :root[data-theme="dark"] .theme-btn .sun,
-  :root[data-theme="dark"] .theme-btn .label-light { display: none; }
+  /* Ikon & label menunjukkan mode tujuan: terang -> bulan/"Gelap", gelap -> matahari/"Terang" */
+  .theme-btn .sun,
+  .theme-btn .label-light { display: none; }
   :root[data-theme="dark"] .theme-btn .moon,
-  :root[data-theme="dark"] .theme-btn .label-dark { display: inline; }
+  :root[data-theme="dark"] .theme-btn .label-dark { display: none; }
+  :root[data-theme="dark"] .theme-btn .sun,
+  :root[data-theme="dark"] .theme-btn .label-light { display: inline; }
+  :root[data-theme="dark"] .theme-btn svg.sun { display: block; }
 
   .hero h1 {
     margin: 0;
@@ -482,11 +484,6 @@
     opacity: 0;
   }
 
-  /* Mode gelap hanya untuk menu utama dan Tabung Oksigen */
-  :root[data-theme="dark"] body[data-app="oksigen"] #viewer iframe {
-    filter: invert(1) hue-rotate(180deg);
-    background: #111;
-  }
   body.open #menu { display: none; }
   body.open #viewer { display: block; }
 </style>
@@ -659,21 +656,35 @@
   // Tombol Back di HP kembali ke menu pilihan
   window.addEventListener('popstate', closeApp);
 
-  // Mode terang / gelap
+  // Mode terang / gelap khusus menu utama (kunci 'menu-theme' sengaja dipisah
+  // dari kunci 'theme' milik halaman lain agar tidak saling mempengaruhi)
   var root = document.documentElement;
   var meta = document.querySelector('meta[name="theme-color"]');
+  // Halaman yang ikut tema menu utama secara otomatis
+  var FOLLOW_THEME = { bangunan: true, manika: true, oksigen: true, spk: true, alat: true };
+  function syncFrameTheme() {
+    if (!FOLLOW_THEME[document.body.getAttribute('data-app')]) return;
+    var t = root.getAttribute('data-theme');
+    try {
+      var d = frame.contentDocument;
+      if (d && d.documentElement) d.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+    try { frame.contentWindow.postMessage({ type: 'theme', theme: t }, '*'); } catch (e) {}
+  }
+  frame.addEventListener('load', syncFrameTheme);
   function applyTheme(t) {
     root.setAttribute('data-theme', t);
     if (meta) meta.setAttribute('content', t === 'dark' ? '#0c1244' : '#16206b');
+    syncFrameTheme();
   }
   var saved = null;
-  try { saved = localStorage.getItem('theme'); } catch (e) {}
+  try { saved = localStorage.getItem('menu-theme'); } catch (e) {}
   applyTheme(saved || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
   document.querySelectorAll('.theme-btn').forEach(function (b) {
     b.addEventListener('click', function () {
       var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       applyTheme(next);
-      try { localStorage.setItem('theme', next); } catch (e) {}
+      try { localStorage.setItem('menu-theme', next); } catch (e) {}
     });
   });
 </script>
