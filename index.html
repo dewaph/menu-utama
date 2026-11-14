@@ -232,8 +232,7 @@
   #viewer iframe {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    border: 0; background: #fff;
-    transition: filter .2s ease;
+    border: 0; background: var(--bg);
   }
   #home {
     position: fixed;
@@ -299,8 +298,6 @@
   :root[data-theme="dark"] .theme-btn .knob .sun { display: none; }
   :root[data-theme="dark"] .theme-btn .knob .moon { display: block; }
 
-  /* Mode gelap hanya untuk menu utama dan Tabung Oksigen */
-  :root[data-theme="dark"] body[data-app="oksigen"] #viewer iframe { filter: invert(1) hue-rotate(180deg); background: #111; }
 
   /* ===== Tablet & komputer ===== */
   @media (min-width: 700px) {
@@ -459,6 +456,9 @@
     home.classList.remove('mini');
     clearTimeout(miniTimer);
     miniTimer = setTimeout(function () { home.classList.add('mini'); }, 2000);
+    // Cadangan: kirim ulang tema sebentar setelah dibuka
+    setTimeout(sendTheme, 500);
+    setTimeout(sendTheme, 1500);
   }
   function closeApp() {
     clearTimeout(miniTimer);
@@ -490,11 +490,18 @@
   // Mode terang / gelap
   var root = document.documentElement;
   var meta = document.querySelector('meta[name="theme-color"]');
+  function sendTheme() {
+    var t = root.getAttribute('data-theme') || 'light';
+    try { if (frame.contentWindow) frame.contentWindow.postMessage({ type: 'theme', theme: t }, '*'); } catch (e) {}
+  }
   function applyTheme(t) {
     root.setAttribute('data-theme', t);
     document.querySelectorAll('.theme-btn').forEach(function (b) { b.setAttribute('aria-checked', t === 'dark' ? 'true' : 'false'); });
     if (meta) meta.setAttribute('content', t === 'dark' ? '#121a5c' : '#24339a');
+    sendTheme();
   }
+  // Setiap halaman selesai dimuat di iframe, langsung samakan temanya dengan menu utama
+  frame.addEventListener('load', sendTheme);
   var saved = null;
   try { saved = localStorage.getItem('theme'); } catch (e) {}
   applyTheme(saved || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
