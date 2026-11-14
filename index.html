@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#16206b">
-<script>(function(){try{var t=localStorage.getItem('menu-theme');if(t!=='dark'&&t!=='light')t=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<meta name="theme-color" content="#24339a">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -15,474 +14,346 @@
 <style>
   :root {
     color-scheme: light;
-    --bg: #eef2f8;
-    --sheet: #f6f8fc;
+    --bg: #eef0f7;
     --surface: #ffffff;
-    --text: #0f172a;
-    --muted: #64748b;
-    --line: #e2e8f0;
-
-    --hero-1: #16206b;
-    --hero-2: #24339a;
-    --hero-3: #0f164f;
-
+    --text: #161a2e;
+    --muted: #5f6580;
+    --line: #e1e4ef;
+    --hero: #24339a;
+    --hero-2: #1a2578;
     --bangunan: #24339a;
-    --bangunan-soft: #e8ecff;
-    --bangunan-border: #c7d2fe;
-
-    --manika: #0d9488;
-    --manika-soft: #dff7f4;
-    --manika-border: #99f6e4;
-
-    --oksigen: #d97706;
-    --oksigen-soft: #fef0d6;
-    --oksigen-border: #fde68a;
-
-    --spk: #7c3aed;
-    --spk-soft: #ede6ff;
-    --spk-border: #ddd6fe;
-
-    --alat: #db2777;
-    --alat-soft: #fce4f0;
-    --alat-border: #fbcfe8;
-
-    --shadow-card: 0 6px 18px -4px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
-    --shadow-sheet: 0 -8px 28px rgba(10, 16, 54, 0.14);
+    --bangunan-soft: #e6e9fb;
+    --manika: #0f766e;
+    --manika-soft: #dcf3ef;
+    --oksigen: #c2570c;
+    --oksigen-soft: #fde9d8;
+    --alat: #be185d;
+    --alat-soft: #fce4ef;
+    --stock: #0369a1;
+    --stock-soft: #dbeefb;
+    --shadow: 0 6px 20px rgba(22, 26, 46, .10);
   }
-
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --bg: #080b14;
-    --sheet: #0e1322;
-    --surface: #161d31;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --line: #232d47;
-
-    --hero-1: #0c1244;
-    --hero-2: #172270;
-    --hero-3: #070b2b;
-
-    --bangunan: #818cf8;
-    --bangunan-soft: #1e264d;
-    --bangunan-border: #313f78;
-
-    --manika: #2dd4bf;
-    --manika-soft: #133337;
-    --manika-border: #1d4d54;
-
-    --oksigen: #fbbf24;
-    --oksigen-soft: #362712;
-    --oksigen-border: #5c3f1c;
-
-    --spk: #a78bfa;
-    --spk-soft: #281f4a;
-    --spk-border: #433375;
-
+    --bg: #0f1120;
+    --surface: #1b1f33;
+    --text: #eef0f8;
+    --muted: #a4abc6;
+    --line: #2a2f48;
+    --hero: #1a2578;
+    --hero-2: #121a5c;
+    --bangunan: #8a99ff;
+    --bangunan-soft: #262c5c;
+    --manika: #4fd1c2;
+    --manika-soft: #173d3a;
+    --oksigen: #ffa05a;
+    --oksigen-soft: #4a2c14;
     --alat: #f472b6;
-    --alat-soft: #3b1930;
-    --alat-border: #61284d;
-
-    --shadow-card: 0 8px 20px -4px rgba(0, 0, 0, 0.45);
-    --shadow-sheet: 0 -8px 30px rgba(0, 0, 0, 0.5);
+    --alat-soft: #4a1d36;
+    --stock: #5cc8ff;
+    --stock-soft: #12384f;
+    --shadow: 0 6px 20px rgba(0, 0, 0, .35);
   }
-
-  * {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  html, body {
-    height: 100%;
-    margin: 0;
-    overscroll-behavior-y: none;
-  }
-
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; overscroll-behavior-y: none; }
   body {
-    background: var(--sheet);
+    background: var(--bg);
     color: var(--text);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
 
-  #menu {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+  #menu { min-height: 100%; display: flex; flex-direction: column; }
 
-  /* =========================================================
-     ARCHITECTURAL DEEP INDIGO HEADER
-     ========================================================= */
   .hero {
     position: relative;
-    background-color: var(--hero-1);
-    background-image:
-      radial-gradient(circle at 88% 18%, rgba(99, 120, 255, 0.28) 0%, transparent 52%),
-      linear-gradient(150deg, var(--hero-2) 0%, var(--hero-1) 55%, var(--hero-3) 100%);
-    color: #ffffff;
-    padding: calc(16px + env(safe-area-inset-top, 0px)) 20px 48px;
     overflow: hidden;
+    flex: none;
+    display: flex; flex-direction: column;
+    background:
+      radial-gradient(120% 90% at 100% 0%, rgba(255,255,255,.16), transparent 55%),
+      linear-gradient(160deg, var(--hero), var(--hero-2));
+    color: #fff;
+    padding: calc(12px + env(safe-area-inset-top, 0px)) 20px 46px;
+    border-radius: 0 0 26px 26px;
   }
-
-  /* Dekorasi garis geometris tipis murni CSS (tanpa beban GPU) */
-  .hero::before {
-    content: "";
-    position: absolute;
-    right: -60px;
-    top: -60px;
-    width: 240px;
-    height: 240px;
-    border-radius: 50%;
-    border: 28px solid rgba(255, 255, 255, 0.045);
+  .hero::before, .hero::after {
+    content: ""; position: absolute; border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,.14);
     pointer-events: none;
   }
-
-  .hero-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .hero-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  /* Logo Pura Group Asli (Tidak Diganti) */
+  .hero::before { width: 160px; height: 160px; right: -50px; bottom: -70px; }
+  .hero::after  { width: 90px; height: 90px; left: -30px; top: 30%; background: rgba(255,255,255,.05); border: 0; }
+  .hero-inner { position: relative; z-index: 1; max-width: 520px; width: 100%; margin: 0 auto; flex: 1; display: flex; flex-direction: column; }
   .brand-wrap {
     display: inline-block;
-    background: #ffffff;
-    padding: 8px 12px;
-    border-radius: 11px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
-    max-width: calc(100% - 110px);
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: 9px;
+    margin-bottom: 8px;
+    max-width: calc(100% - 60px);
   }
-  :root[data-theme="dark"] .brand-wrap {
-    background: #1b1f33;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-  .brand {
-    display: block;
-    height: 24px;
-    width: auto;
-    max-width: 100%;
-  }
+  :root[data-theme="dark"] .brand-wrap { background: #1b1f33; }
+  .brand { display: block; height: 20px; width: auto; max-width: 100%; }
   .brand-dark { display: none; }
   :root[data-theme="dark"] .brand-light { display: none; }
   :root[data-theme="dark"] .brand-dark { display: block; }
-
-  /* Tombol Tema Kapsul Modern */
-  .theme-btn {
-    height: 38px;
-    padding: 0 13px;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font: inherit;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.12s ease, background-color 0.15s ease;
+  .hero h1 { margin: 6px 0 0; font-size: 1.2rem; line-height: 1.2; letter-spacing: -.015em; font-weight: 750; }
+  .hero p { margin: 4px 0 0; color: rgba(255,255,255,.82); font-size: .84rem; line-height: 1.35; }
+  .date-chip {
+    align-self: flex-start;
+    margin-top: 0;
+    padding-top: 10px;
   }
-  .theme-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+  .date-chip span {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.18);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    padding: 5px 11px; border-radius: 999px;
+    font-size: .75rem; font-weight: 600; letter-spacing: .01em;
   }
-  .theme-btn:active {
-    transform: scale(0.95);
-  }
-  .theme-btn svg {
-    width: 18px;
-    height: 18px;
-    flex: none;
-  }
-  /* Ikon & label menunjukkan mode tujuan: terang -> bulan/"Gelap", gelap -> matahari/"Terang" */
-  .theme-btn .sun,
-  .theme-btn .label-light { display: none; }
-  :root[data-theme="dark"] .theme-btn .moon,
-  :root[data-theme="dark"] .theme-btn .label-dark { display: none; }
-  :root[data-theme="dark"] .theme-btn .sun,
-  :root[data-theme="dark"] .theme-btn .label-light { display: inline; }
-  :root[data-theme="dark"] .theme-btn svg.sun { display: block; }
-
-  .hero h1 {
-    margin: 0;
-    font-size: clamp(1.32rem, 4vw, 1.65rem);
-    font-weight: 800;
-    line-height: 1.22;
-    letter-spacing: -0.02em;
-  }
-
-  .hero p {
-    margin: 6px 0 0;
-    color: rgba(255, 255, 255, 0.82);
-    font-size: 0.9rem;
-    line-height: 1.45;
-  }
-
-  /* Bar Informasi Ringkas di Dalam Header */
-  .summary-strip {
-    margin-top: 16px;
-    padding: 10px 14px;
-    border-radius: 13px;
-    background: rgba(0, 0, 0, 0.22);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.92);
-  }
-
-  .summary-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-weight: 600;
-  }
-
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #34d399;
-    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.25);
-  }
-
-  /* =========================================================
-     OVERLAPPING SHEET & MODERN ROW CARDS
-     ========================================================= */
-  .sheet {
-    position: relative;
-    z-index: 2;
-    flex: 1;
-    margin-top: -26px;
-    background: var(--sheet);
-    border-radius: 28px 28px 0 0;
-    box-shadow: var(--shadow-sheet);
-    padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
-    display: flex;
-    flex-direction: column;
-  }
+  .date-chip i { width: 7px; height: 7px; border-radius: 50%; background: #5eead4; box-shadow: 0 0 0 4px rgba(94,234,212,.25); }
 
   .list {
-    max-width: 600px;
+    max-width: 520px;
     width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
+    margin: -30px auto 0;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 1fr 1fr auto;
+    flex: 1;
+    gap: 14px;
+    position: relative; z-index: 2;
   }
-
-  /* Kartu Baris Modern dengan Full-Height Tinted Icon Well */
   .choice {
     position: relative;
-    display: flex;
-    align-items: stretch;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between;
+    gap: 22px;
+    min-height: 184px;
     width: 100%;
-    padding: 0;
     text-align: left;
-    background: var(--surface);
+    background: linear-gradient(155deg, var(--soft) 0%, var(--surface) 64%);
     color: var(--text);
     border: 1px solid var(--line);
-    border-radius: 20px;
-    box-shadow: var(--shadow-card);
+    border-radius: 26px;
+    padding: 16px 16px 18px;
+    box-shadow: 0 10px 24px -12px rgba(22,26,46,.28), inset 0 1px 0 rgba(255,255,255,.6);
     font: inherit;
     cursor: pointer;
-    overflow: hidden;
-    transition: transform 0.14s ease, border-color 0.14s ease;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .18s ease, box-shadow .18s ease;
+    animation: rise .55s cubic-bezier(.2,.8,.2,1) both;
   }
-
-  .choice:hover {
-    transform: translateY(-2px);
-    border-color: var(--c-border);
+  :root[data-theme="dark"] .choice { box-shadow: 0 10px 24px -12px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.05); }
+  /* cincin dekoratif di pojok kanan bawah */
+  .choice::before, .choice::after {
+    content: ""; position: absolute; z-index: -1; border-radius: 50%;
+    border: 1.5px solid var(--c); opacity: .14; pointer-events: none;
   }
-
-  .choice:active {
-    transform: scale(0.985);
-  }
-
-  .choice:focus-visible {
-    outline: 3px solid var(--c);
-    outline-offset: 2px;
-  }
-
-  /* Blok Warna Penuh di Sisi Kiri Kartu (Sangat Kontras dari Desain Lama) */
+  .choice::before { width: 120px; height: 120px; right: -36px; bottom: -44px; }
+  .choice::after  { width: 70px; height: 70px; right: -6px; bottom: -14px; }
+  .choice:nth-child(2) { animation-delay: .06s; }
+  .choice:nth-child(3) { animation-delay: .12s; }
+  .choice:nth-child(4) { animation-delay: .18s; }
+  .choice:nth-child(5) { animation-delay: .24s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px) scale(.97); } to { opacity: 1; transform: none; } }
+  .choice:active { transform: scale(.96); box-shadow: 0 4px 12px -8px rgba(22,26,46,.3); }
+  .choice:focus-visible { outline: 3px solid var(--c); outline-offset: 2px; }
   .icon {
-    position: relative;
     flex: none;
-    width: 74px;
-    background: var(--soft);
-    color: var(--c);
-    border-right: 1px solid var(--c-border);
-    display: grid;
-    place-items: center;
-  }
-
-  /* Garis Aksen Pekat di Tepi Paling Kiri */
-  .icon::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 5px;
+    width: 56px; height: 56px;
+    border-radius: 18px;
     background: var(--c);
+    background: linear-gradient(140deg, var(--c), color-mix(in srgb, var(--c) 62%, #000));
+    color: #fff;
+    display: grid; place-items: center;
+    box-shadow: 0 10px 18px -8px var(--c), inset 0 1px 0 rgba(255,255,255,.35);
   }
-
-  .icon svg {
-    width: 28px;
-    height: 28px;
-    transition: transform 0.15s ease;
+  :root[data-theme="dark"] .icon {
+    background: linear-gradient(140deg, var(--c), color-mix(in srgb, var(--c) 70%, #000));
+    color: #10121f;
   }
-
-  .choice:hover .icon svg {
-    transform: scale(1.08);
-  }
-
-  /* Konten Teks Tengah & Tombol Panah Kanan */
-  .card-body {
-    flex: 1;
-    min-width: 0;
-    padding: 16px 16px 16px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .text {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .text strong {
-    display: block;
-    font-size: 1.06rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    line-height: 1.25;
-  }
-
-  .text span {
-    display: block;
-    margin-top: 4px;
-    color: var(--muted);
-    font-size: 0.87rem;
-    line-height: 1.35;
-  }
-
-  /* Lingkaran Panah Berwarna Senada */
-  .chev-circle {
-    flex: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--soft);
-    color: var(--c);
-    display: grid;
-    place-items: center;
-    transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
-  }
-
+  .icon svg { width: 28px; height: 28px; }
+  .text { flex: none; min-width: 0; width: 100%; padding-right: 4px; }
+  .text strong { display: block; font-size: 1.02rem; line-height: 1.22; letter-spacing: -.015em; font-weight: 700; }
+  .text span { display: block; margin-top: 5px; color: var(--muted); font-size: .8rem; line-height: 1.35; }
+  /* tombol panah bulat */
   .chev {
-    width: 18px;
-    height: 18px;
+    position: absolute; right: 14px; top: 14px;
+    width: 32px; height: 32px; padding: 7px;
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--c);
+    box-shadow: 0 4px 10px -4px rgba(22,26,46,.3);
   }
-
-  .choice:hover .chev-circle {
-    background: var(--c);
-    color: #ffffff;
-    transform: translateX(3px);
+  :root[data-theme="dark"] .chev { background: rgba(255,255,255,.08); box-shadow: none; }
+  /* kartu terakhir (ganjil) melebar penuh */
+  .choice:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    flex-direction: row; align-items: center; justify-content: flex-start;
+    min-height: 0; gap: 16px; padding: 18px 16px;
+    background: linear-gradient(110deg, var(--soft) 0%, var(--surface) 70%);
   }
-
-  #bangunan { --c: var(--bangunan); --soft: var(--bangunan-soft); --c-border: var(--bangunan-border); }
-  #manika   { --c: var(--manika);   --soft: var(--manika-soft);   --c-border: var(--manika-border); }
-  #oksigen  { --c: var(--oksigen);  --soft: var(--oksigen-soft);  --c-border: var(--oksigen-border); }
-  #spk      { --c: var(--spk);      --soft: var(--spk-soft);      --c-border: var(--spk-border); }
-  #alat     { --c: var(--alat);     --soft: var(--alat-soft);     --c-border: var(--alat-border); }
+  .choice:last-child:nth-child(odd) .text { flex: 1; width: auto; }
+  .choice:last-child:nth-child(odd) .text strong { font-size: 1.08rem; }
+  .choice:last-child:nth-child(odd) .chev { position: static; flex: none; width: 36px; height: 36px; padding: 8px; }
+  @media (max-width: 340px) {
+    .list { grid-template-columns: 1fr; }
+    .choice { min-height: 0; flex-direction: row; align-items: center; justify-content: flex-start; gap: 14px; }
+    .text { flex: 1; width: auto; }
+    .chev { position: static; flex: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .choice { animation: none; transition: none; } }
+  #bangunan { --c: var(--bangunan); --soft: var(--bangunan-soft); }
+  #manika { --c: var(--manika); --soft: var(--manika-soft); }
+  #oksigen { --c: var(--oksigen); --soft: var(--oksigen-soft); }
+  #alat { --c: var(--alat); --soft: var(--alat-soft); }
+  #stock { --c: var(--stock); --soft: var(--stock-soft); }
 
   .foot {
-    margin-top: auto;
-    padding-top: 26px;
+    padding: 22px 24px calc(22px + env(safe-area-inset-bottom, 0px));
     text-align: center;
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: .82rem;
+  }
+  .foot::before {
+    content: ""; display: block; width: 38px; height: 4px; border-radius: 4px;
+    background: var(--line); margin: 0 auto 12px;
   }
 
-  /* =========================================================
-     VIEWER IFRAME & TOMBOL KEMBALI
-     ========================================================= */
   #viewer {
     display: none;
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background: var(--bg);
-    z-index: 50;
   }
-
   #viewer iframe {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: #fff;
-    transition: filter 0.2s ease;
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0; background: #fff;
+    transition: filter .2s ease;
   }
-
   #home {
     position: fixed;
     left: 14px;
     bottom: calc(14px + env(safe-area-inset-bottom, 0px));
     z-index: 2147483647;
-    display: inline-flex;
-    align-items: center;
-    border: 0;
-    border-radius: 999px;
+    display: inline-flex; align-items: center;
+    border: 0; border-radius: 999px;
     padding: 12px 18px;
-    font: inherit;
-    font-weight: 600;
+    font: inherit; font-weight: 600;
     color: #fff;
-    background: var(--hero-2);
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+    background: var(--hero);
+    box-shadow: 0 2px 10px rgba(0,0,0,.35);
     cursor: pointer;
-    transition: padding 0.45s ease, opacity 0.45s ease;
+    transition: padding .45s ease, opacity .45s ease;
   }
-  #home svg {
-    flex: none;
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    transition: margin 0.45s ease;
-  }
+  #home svg { flex: none; width: 20px; height: 20px; margin-right: 8px; transition: margin .45s ease; }
   #home .label {
     display: inline-block;
     max-width: 180px;
     overflow: hidden;
     white-space: nowrap;
-    transition: max-width 0.45s ease, opacity 0.3s ease;
+    transition: max-width .45s ease, opacity .3s ease;
   }
   /* Keadaan mengecil: tinggal ikon bulat kecil */
-  #home.mini {
-    padding: 12px;
-    opacity: 0.75;
+  #home.mini { padding: 12px; opacity: .75; }
+  #home.mini svg { margin-right: 0; }
+  #home.mini .label { max-width: 0; opacity: 0; }
+  /* Tombol mode terang / gelap (saklar) */
+  .theme-btn {
+    position: absolute; z-index: 5;
+    top: calc(14px + env(safe-area-inset-top, 0px));
+    right: 16px;
+    width: 62px; height: 34px; padding: 0;
+    border: 1px solid rgba(255,255,255,.28);
+    border-radius: 999px;
+    background: rgba(255,255,255,.16);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .25s ease;
   }
-  #home.mini svg {
-    margin-right: 0;
+  .theme-btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .theme-btn .hint {
+    position: absolute; top: 50%; width: 15px; height: 15px; margin-top: -7.5px;
+    color: rgba(255,255,255,.75); pointer-events: none;
   }
-  #home.mini .label {
-    max-width: 0;
-    opacity: 0;
+  .theme-btn .hint-sun  { left: 9px; }
+  .theme-btn .hint-moon { right: 9px; }
+  .theme-btn .knob {
+    position: absolute; top: 3px; left: 3px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: #fff;
+    display: grid; place-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    transition: transform .3s cubic-bezier(.4,1.4,.5,1), background .25s ease;
+    pointer-events: none;
+  }
+  .theme-btn .knob svg { width: 16px; height: 16px; }
+  .theme-btn .knob .moon { display: none; }
+  :root[data-theme="dark"] .theme-btn { background: rgba(10,14,46,.45); }
+  :root[data-theme="dark"] .theme-btn .knob { transform: translateX(28px); background: #2b3270; }
+  :root[data-theme="dark"] .theme-btn .knob .sun { display: none; }
+  :root[data-theme="dark"] .theme-btn .knob .moon { display: block; }
+
+  /* Mode gelap hanya untuk menu utama dan Tabung Oksigen */
+  :root[data-theme="dark"] body[data-app="oksigen"] #viewer iframe { filter: invert(1) hue-rotate(180deg); background: #111; }
+
+  /* ===== Tablet & komputer ===== */
+  @media (min-width: 700px) {
+    #menu { padding: 28px 28px 0; }
+    .hero {
+      width: 100%; max-width: 1040px; margin: 0 auto;
+      border-radius: 30px;
+      padding: 30px 36px 70px;
+    }
+    .hero::before { width: 320px; height: 320px; right: -80px; bottom: -150px; }
+    .hero::after  { width: 160px; height: 160px; left: 38%; top: -60px; }
+    .hero-inner { max-width: none; }
+    .brand-wrap { padding: 8px 14px; margin-bottom: 16px; }
+    .brand { height: 26px; }
+    .hero h1 { font-size: 2rem; margin-top: 4px; }
+    .hero p { font-size: 1rem; margin-top: 8px; }
+    .date-chip { padding-top: 18px; }
+    .date-chip span { font-size: .85rem; padding: 7px 14px; }
+    .theme-btn { top: 28px; right: 32px; }
+    .theme-btn:hover { background: rgba(255,255,255,.26); }
+
+    .list {
+      max-width: 1040px; margin: -40px auto 0; padding: 0 28px;
+      flex: none;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-rows: none;
+      gap: 18px;
+    }
+    .choice { grid-column: span 2; min-height: 210px; padding: 20px; }
+    .choice:nth-child(n+4),
+    .choice:last-child:nth-child(odd) { grid-column: span 3; }
+    .choice:last-child:nth-child(odd) {
+      flex-direction: column; align-items: flex-start; justify-content: space-between;
+      gap: 22px; min-height: 210px; padding: 20px;
+      background: linear-gradient(155deg, var(--soft) 0%, var(--surface) 64%);
+    }
+    .choice:last-child:nth-child(odd) .text { flex: none; width: 100%; }
+    .choice:last-child:nth-child(odd) .text strong { font-size: 1.15rem; }
+    .choice:last-child:nth-child(odd) .chev { position: absolute; width: 38px; height: 38px; padding: 9px; right: 18px; top: 18px; }
+    .icon { width: 62px; height: 62px; border-radius: 20px; }
+    .icon svg { width: 31px; height: 31px; }
+    .text strong { font-size: 1.15rem; }
+    .text span { font-size: .9rem; margin-top: 6px; }
+    .chev { width: 38px; height: 38px; padding: 9px; right: 18px; top: 18px; }
+    .choice { transition: transform .22s ease, box-shadow .22s ease; }
+    .choice:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 34px -16px rgba(22,26,46,.4), inset 0 1px 0 rgba(255,255,255,.6);
+    }
+    .choice:hover .chev { background: var(--c); color: #fff; }
+    :root[data-theme="dark"] .choice:hover .chev { color: #10121f; }
+    .choice:active { transform: translateY(-1px) scale(.99); }
+    .foot { margin-top: auto; padding-top: 36px; }
   }
 
   body.open #menu { display: none; }
@@ -492,110 +363,74 @@
 <body>
   <main id="menu">
     <header class="hero">
+      <button class="theme-btn" type="button" role="switch" aria-checked="false" aria-label="Mode gelap"><svg class="hint hint-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="hint hint-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="knob"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" fill="#fbbf24"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="#fde68a" stroke="#fcd34d" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></span></button>
       <div class="hero-inner">
-        <div class="hero-top">
-          <span class="brand-wrap"><img class="brand brand-light" src="pura-group-light.svg" alt="Pura Group"><img class="brand brand-dark" src="pura-group-dark.svg" alt="Pura Group"></span>
-          <button class="theme-btn" type="button" aria-label="Ganti mode terang atau gelap">
-            <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="#ffb703" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" fill="#ffd54a"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-            <svg class="moon" viewBox="0 0 24 24" fill="#ffe08a" stroke="#ffc933" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
-            <span class="label-light">Terang</span>
-            <span class="label-dark">Gelap</span>
-          </button>
-        </div>
-
+        <span class="brand-wrap"><img class="brand brand-light" src="pura-group-light.svg" alt="Pura Group"><img class="brand brand-dark" src="pura-group-dark.svg" alt="Pura Group"></span>
         <h1>Outstanding Pura Bangunan dan Manika</h1>
-        <p>Pantau barang pesanan, tabung oksigen, SPK, dan alat kerja.</p>
-
-        <div class="summary-strip">
-          <span class="summary-item">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span>5 Layanan Aktif</span>
-          </span>
-          <span id="today-date">Portal SIP</span>
-        </div>
+        <p>Pantau outstanding, tabung oksigen, alat kerja, dan stok gudang.</p>
+        <div class="date-chip"><span><i></i><b id="today" style="font-weight:600"></b></span></div>
       </div>
     </header>
 
-    <section class="sheet" aria-label="Daftar Menu Outstanding">
-      <div class="list">
-        <button class="choice" id="bangunan" data-url="https://dewaph.github.io/outstanding-bangunan-supabase/">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M2 21h20"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01M15 10h.01"/></svg>
-          </span>
-          <span class="card-body">
-            <span class="text">
-              <strong>Outstanding Bangunan</strong>
-              <span>Daftar outstanding bangunan</span>
-            </span>
-            <span class="chev-circle" aria-hidden="true">
-              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-            </span>
-          </span>
-        </button>
+    <div class="list">
+      <button class="choice" id="bangunan" data-url="https://dewaph.github.io/outstanding-bangunan-supabase/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M2 21h20"/><path d="M9 21v-6h6v6"/><path d="M9 10h.01M15 10h.01"/></svg>
+        </span>
+        <span class="text">
+          <strong>Outstanding Bangunan</strong>
+          <span>Daftar outstanding bangunan</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
 
-        <button class="choice" id="manika" data-url="https://dewaph.github.io/outstanding-manika-supabase/">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/></svg>
-          </span>
-          <span class="card-body">
-            <span class="text">
-              <strong>Outstanding Manika</strong>
-              <span>Daftar outstanding Manika</span>
-            </span>
-            <span class="chev-circle" aria-hidden="true">
-              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-            </span>
-          </span>
-        </button>
+      <button class="choice" id="manika" data-url="https://dewaph.github.io/outstanding-manika-supabase/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/></svg>
+        </span>
+        <span class="text">
+          <strong>Outstanding Manika</strong>
+          <span>Daftar outstanding Manika</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
 
-        <button class="choice" id="oksigen" data-url="https://dewaph.github.io/tabung-oksigen/">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4"/><path d="M12 2v3"/><path d="M8 9a4 4 0 014-4 4 4 0 014 4v11a2 2 0 01-2 2h-4a2 2 0 01-2-2V9z"/><path d="M8 11h8"/></svg>
-          </span>
-          <span class="card-body">
-            <span class="text">
-              <strong>Tabung Oksigen</strong>
-              <span>Pengelolaan tabung dari supplier</span>
-            </span>
-            <span class="chev-circle" aria-hidden="true">
-              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-            </span>
-          </span>
-        </button>
+      <button class="choice" id="oksigen" data-url="https://dewaph.github.io/tabung-oksigen/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2h4"/><path d="M12 2v3"/><path d="M8 9a4 4 0 014-4 4 4 0 014 4v11a2 2 0 01-2 2h-4a2 2 0 01-2-2V9z"/><path d="M8 11h8"/></svg>
+        </span>
+        <span class="text">
+          <strong>Tabung Oksigen</strong>
+          <span>Pengelolaan tabung dari supplier</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
 
-        <button class="choice" id="spk" data-url="https://dewaph.github.io/daftar-spk/">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V7z"/><path d="M14 2v5h5"/><path d="M9 13h6M9 17h6M9 9h2"/></svg>
-          </span>
-          <span class="card-body">
-            <span class="text">
-              <strong>Daftar SPK</strong>
-              <span>Daftar surat perintah kerja</span>
-            </span>
-            <span class="chev-circle" aria-hidden="true">
-              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-            </span>
-          </span>
-        </button>
 
-        <button class="choice" id="alat" data-url="https://dewaph.github.io/alat-kerja/">
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 005.4 5.4l-9.9 9.9a2.1 2.1 0 01-3-3l9.9-9.9z"/><path d="M14.7 6.3l3-3 3 3-3 3"/></svg>
-          </span>
-          <span class="card-body">
-            <span class="text">
-              <strong>Peminjaman Alat Kerja</strong>
-              <span>Catatan peminjaman alat kerja</span>
-            </span>
-            <span class="chev-circle" aria-hidden="true">
-              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-            </span>
-          </span>
-        </button>
-      </div>
+      <button class="choice" id="alat" data-url="https://dewaph.github.io/alat-kerja/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 005.4 5.4l-9.9 9.9a2.1 2.1 0 01-3-3l9.9-9.9z"/><path d="M14.7 6.3l3-3 3 3-3 3"/></svg>
+        </span>
+        <span class="text">
+          <strong>Peminjaman Alat Kerja</strong>
+          <span>Catatan peminjaman alat kerja</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
 
-      <footer class="foot">Pilih salah satu layanan di atas untuk membuka daftarnya.</footer>
-    </section>
+      <button class="choice" id="stock" data-url="https://dewaph.github.io/pengelolaan-stock/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 4l9 5.5"/><path d="M5 8.5V20h14V8.5"/><rect x="8" y="12" width="3.5" height="3.5" rx=".6"/><rect x="12.5" y="12" width="3.5" height="3.5" rx=".6"/><rect x="10.25" y="16.5" width="3.5" height="3.5" rx=".6"/></svg>
+        </span>
+        <span class="text">
+          <strong>Kelola Stock Material Gudang</strong>
+          <span>Pengelolaan stok material gudang</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <footer class="foot">Pilih salah satu untuk membuka daftarnya.</footer>
   </main>
 
   <div id="viewer">
@@ -604,6 +439,12 @@
   </div>
 
 <script>
+  (function () {
+    try {
+      var t = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      document.getElementById('today').textContent = t;
+    } catch (e) {}
+  })();
   var frame = document.getElementById('frame');
   var home = document.getElementById('home');
 
@@ -630,17 +471,6 @@
   document.querySelectorAll('.choice').forEach(function (b) {
     b.addEventListener('click', function () { openApp(b); });
   });
-
-  // Tampilkan tanggal hari ini secara otomatis di bar ringkasan
-  var todayEl = document.getElementById('today-date');
-  if (todayEl) {
-    try {
-      todayEl.textContent = new Date().toLocaleDateString('id-ID', {
-        weekday: 'long', day: 'numeric', month: 'short', year: 'numeric'
-      });
-    } catch (e) {}
-  }
-
   // Sekali klik langsung kembali ke menu utama
   home.addEventListener('click', function () {
     // Kalau sedang mengecil: tekan sekali = tampil penuh dulu
@@ -657,52 +487,24 @@
   // Tombol Back di HP kembali ke menu pilihan
   window.addEventListener('popstate', closeApp);
 
-  // Mode terang / gelap khusus menu utama (kunci 'menu-theme' sengaja dipisah
-  // dari kunci 'theme' milik halaman lain agar tidak saling mempengaruhi)
+  // Mode terang / gelap
   var root = document.documentElement;
   var meta = document.querySelector('meta[name="theme-color"]');
-  // Halaman yang ikut tema menu utama secara otomatis
-  var FOLLOW_THEME = { bangunan: true, manika: true, oksigen: true, spk: true, alat: true };
-  function syncFrameTheme() {
-    if (!FOLLOW_THEME[document.body.getAttribute('data-app')]) return;
-    var t = root.getAttribute('data-theme');
-    try {
-      var d = frame.contentDocument;
-      if (d && d.documentElement) d.documentElement.setAttribute('data-theme', t);
-    } catch (e) {}
-    try { frame.contentWindow.postMessage({ type: 'theme', theme: t }, '*'); } catch (e) {}
-  }
-  frame.addEventListener('load', syncFrameTheme);
   function applyTheme(t) {
     root.setAttribute('data-theme', t);
-    if (meta) meta.setAttribute('content', t === 'dark' ? '#0c1244' : '#16206b');
-    syncFrameTheme();
+    document.querySelectorAll('.theme-btn').forEach(function (b) { b.setAttribute('aria-checked', t === 'dark' ? 'true' : 'false'); });
+    if (meta) meta.setAttribute('content', t === 'dark' ? '#121a5c' : '#24339a');
   }
-  // Bawaan: ikuti warna sistem HP. Pilihan manual (tombol tema) hanya tersimpan
-  // bila berbeda dari warna sistem; memilih mode yang sama dengan sistem = kembali otomatis.
-  var mq = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
-  function sysTheme() { return mq && mq.matches ? 'dark' : 'light'; }
   var saved = null;
-  try { saved = localStorage.getItem('menu-theme'); } catch (e) {}
-  if (saved !== 'dark' && saved !== 'light') saved = null;
-  applyTheme(saved || sysTheme());
+  try { saved = localStorage.getItem('theme'); } catch (e) {}
+  applyTheme(saved || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
   document.querySelectorAll('.theme-btn').forEach(function (b) {
     b.addEventListener('click', function () {
       var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       applyTheme(next);
-      try {
-        if (next === sysTheme()) localStorage.removeItem('menu-theme');
-        else localStorage.setItem('menu-theme', next);
-      } catch (e) {}
+      try { localStorage.setItem('theme', next); } catch (e) {}
     });
   });
-  // Warna sistem berubah (mis. jadwal otomatis siang/malam): ikuti bila belum dipilih manual
-  function onSys() {
-    var m = null;
-    try { m = localStorage.getItem('menu-theme'); } catch (e) {}
-    if (m !== 'dark' && m !== 'light') applyTheme(sysTheme());
-  }
-  if (mq) { if (mq.addEventListener) mq.addEventListener('change', onSys); else if (mq.addListener) mq.addListener(onSys); }
 </script>
 </body>
 </html>
